@@ -40,13 +40,39 @@ body:has(#screen:not(.hidden)) main{max-width:1650px;padding:3px 12px}
 @media(max-width:850px){.judge-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.rules-grid{grid-template-columns:1fr}}
 @media(min-width:1100px) and (max-height:800px){.judge-tile{padding:4px 7px}.pub-reveal-summary{margin-bottom:4px}#screenDetail.panel{padding:5px 9px}#screenBoard .pub-box td,#screenBoard .pub-box th{padding:2px 5px}}
 @media(max-width:650px){.judge-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rules-grid>div{padding:9px}.rules-grid span{font-size:13px}.pub-rule-heading{font-size:18px}}
-</style></head><body><header><h1>🍻 JULEØL-TV 2026</h1><div>22. årgang · 11 dommere · 18 øl</div></header><main><div id="status" class="muted">Kobler til Firebase …</div><div class="row mode-nav" style="margin:16px 0"><button id="screenBtn">📺 Prosjektor</button><button id="adminBtn">📱 Kontrollpanel</button></div><section id="screen" class="screen hidden"><div class="pub-header"><div class="pub-kicker">★ DEN 22. JULEØLSMAKINGEN ★</div><div class="pub-subtitle">EST. 2005 · 11 DOMMERE · 18 ØL</div></div><div class="muted" id="screenRound"></div><div class="big" id="screenTitle">Velkommen til juleølsmakingen!</div><div class="panel" id="screenDetail"></div><div id="screenBoard" style="width:min(95%,800px)"></div></section><section id="admin" class="hidden"><div id="login" class="panel"><h2>🔐 Arrangørinnlogging</h2><p class="muted">Logg inn med e-post og passord du oppretter i Firebase Authentication.</p><div class="grid"><input id="email" type="email" placeholder="E-post"><input id="password" type="password" placeholder="Passord"></div><p><button id="loginBtn">Logg inn</button></p><div id="loginError" class="error"></div></div><div id="controls" class="hidden"><div class="row"><span id="who" class="muted"></span><button id="logoutBtn">Logg ut</button><button id="exportBtn">Last ned sikkerhetskopi</button></div><div class="panel entry-panel"><div class="row round-nav"><h2 id="roundTitle">Runde 1 av 18</h2><button id="prevBtn">← Forrige</button><button id="nextBtn">Neste →</button></div><p class="muted entry-help">Velg terningkast og skriv eventuelt ølgjetning. Lagre med knappen nederst på skjermen.</p><div id="entries"></div></div><div class="panel reveal-panel"><h2>🍺 Avslør ølet</h2><input id="beerName" placeholder="Navn på ølet" style="width:100%"><p><button id="revealBtn">🎉 Avslør ølet på prosjektoren</button> <button id="hideBtn">Skjul ølnavnet igjen</button></p><p id="revealNote" class="muted"></p></div><div class="mobile-actions"><button id="saveBtn">💾 Lagre poeng</button><span id="saveStatus" class="muted" role="status"></span></div><div class="panel stats-panel"><h2>🏆 Statistikk og Awards</h2><div id="adminStats"></div></div></div></section></main><script type="module">
+</style>
+<style id="data-v23">
+#dataPage{font-family:system-ui;max-width:1500px;margin:auto}
+#dataPage h2,#dataPage h3{font-family:Georgia,serif;color:#e8c17a}
+.data-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.data-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.data-card{background:#263a2d;border:1px solid #76613d;border-radius:7px;padding:14px}
+.data-card strong{display:block;font:700 30px Georgia,serif;color:#efc776}
+.data-card span{font-size:12px;color:#dfd2b7}
+.data-columns{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.data-table{font:13px system-ui}.data-table td,.data-table th{padding:6px 8px}
+.awards-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.award-card{border:1px solid #7c6542;background:#26372b;border-radius:7px;padding:13px}
+.award-card .award-name{color:#e9c37d;font-weight:700}
+.award-card .award-winner{font-size:19px;font-weight:700;margin:8px 0;color:#f8edce}
+.award-card .award-desc{font-size:12px;color:#c8c3b4}
+.guess-review{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:center;padding:8px;border-bottom:1px solid #5b634f}
+.guess-review button{padding:7px 10px;font-size:12px}
+.guess-review .decision{display:flex;gap:5px;justify-content:flex-end}
+.guess-review button.selected{background:#b5d4a3;border-color:#6d966b}
+.guess-review button.no.selected{background:#e4a49b;border-color:#ae6c64}
+.data-note{font-size:12px;color:#c8c3b4}
+#resetBtn{background:#dca6a0}
+@media(max-width:850px){.data-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.data-columns{grid-template-columns:1fr}.awards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.awards-grid{grid-template-columns:1fr}.data-card strong{font-size:24px}.data-table{font-size:11px}.data-table td,.data-table th{padding:5px 3px}.guess-review{grid-template-columns:1fr}.guess-review .decision{justify-content:flex-start}}
+</style>
+</head><body><header><h1>🍻 JULEØL-TV 2026</h1><div>22. årgang · 11 dommere · 18 øl</div></header><main><div id="status" class="muted">Kobler til Firebase …</div><div class="row mode-nav" style="margin:16px 0"><button id="screenBtn">📺 Prosjektor</button><button id="adminBtn">📱 Kontrollpanel</button><button id="dataBtn">📊 Data & Awards</button></div><section id="screen" class="screen hidden"><div class="pub-header"><div class="pub-kicker">★ DEN 22. JULEØLSMAKINGEN ★</div><div class="pub-subtitle">EST. 2005 · 11 DOMMERE · 18 ØL</div></div><div class="muted" id="screenRound"></div><div class="big" id="screenTitle">Velkommen til juleølsmakingen!</div><div class="panel" id="screenDetail"></div><div id="screenBoard" style="width:min(95%,800px)"></div></section><section id="dataPage" class="hidden"><div class="data-head"><h2>📊 Data & Awards</h2><span class="muted">Oppdateres automatisk etter avsløring</span></div><div id="dataContent"></div></section><section id="admin" class="hidden"><div id="login" class="panel"><h2>🔐 Arrangørinnlogging</h2><p class="muted">Logg inn med e-post og passord du oppretter i Firebase Authentication.</p><div class="grid"><input id="email" type="email" placeholder="E-post"><input id="password" type="password" placeholder="Passord"></div><p><button id="loginBtn">Logg inn</button></p><div id="loginError" class="error"></div></div><div id="controls" class="hidden"><div class="row"><span id="who" class="muted"></span><button id="logoutBtn">Logg ut</button><button id="exportBtn">Last ned sikkerhetskopi</button><button id="resetBtn" type="button">🧹 Nullstill testdata</button></div><div class="panel entry-panel"><div class="row round-nav"><h2 id="roundTitle">Runde 1 av 18</h2><button id="prevBtn">← Forrige</button><button id="nextBtn">Neste →</button></div><p class="muted entry-help">Velg terningkast og skriv eventuelt ølgjetning. Lagre med knappen nederst på skjermen.</p><div id="entries"></div></div><div class="panel reveal-panel"><h2>🍺 Avslør ølet</h2><input id="beerName" placeholder="Navn på ølet" style="width:100%"><p><button id="revealBtn">🎉 Avslør ølet på prosjektoren</button> <button id="hideBtn">Skjul ølnavnet igjen</button></p><p id="revealNote" class="muted"></p></div><div class="mobile-actions"><button id="saveBtn">💾 Lagre poeng</button><span id="saveStatus" class="muted" role="status"></span></div><div class="panel stats-panel"><h2>🎯 Godkjenn ølgjetninger</h2><p class="muted">Kun avslørte øl vises her. Marker gjetninger som riktige eller feil. Resultatene lagres med knappen under.</p><div id="guessReview"></div><p><button id="saveGuessesBtn">💾 Lagre godkjenninger</button></p><p id="guessStatus" class="muted"></p></div></div></section></main><script type="module">
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
 import {getFirestore,doc,onSnapshot,setDoc} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js';
 import {getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
 const firebaseConfig={apiKey:'AIzaSyAd5oa-8aUmBZoP2ubCOAB4KQabWajvfcU',authDomain:'juleol-tv.firebaseapp.com',projectId:'juleol-tv',storageBucket:'juleol-tv.firebasestorage.app',messagingSenderId:'442910836422',appId:'1:442910836422:web:3e88d04f770624dc6039c7',measurementId:'G-PBN1XKQHEK'};
 const names=['Anders','Bjørn','Eirik','Håvard','Jan','John','Kristian P.','Kristian S.','Loffa','Simen','Åsmund'];const $=id=>document.getElementById(id);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const empty=()=>({beer:'',revealed:false,votes:Object.fromEntries(names.map(n=>[n,{score:0,guess:'',comment:''}]))});let state={round:0,rounds:Array.from({length:18},empty)},authUser=null,editing=0,dirty=false,loading=true;const app=initializeApp(firebaseConfig),db=getFirestore(app),auth=getAuth(app),ref=doc(db,'events','juleol-2026');
-function show(mode){$('screen').classList.toggle('hidden',mode!=='screen');$('admin').classList.toggle('hidden',mode!=='admin');location.hash=mode;render();} $('screenBtn').onclick=()=>show('screen');$('adminBtn').onclick=()=>show('admin');
+function show(mode){$('screen').classList.toggle('hidden',mode!=='screen');$('admin').classList.toggle('hidden',mode!=='admin');$('dataPage').classList.toggle('hidden',mode!=='data');location.hash=mode;render();} $('screenBtn').onclick=()=>show('screen');$('adminBtn').onclick=()=>show('admin');$('dataBtn').onclick=()=>show('data');
 function votes(r){return names.map(n=>r.votes?.[n]||{score:0,guess:'',comment:''})}function total(r){return votes(r).reduce((s,v)=>s+(+v.score||0),0)}function count(r){return votes(r).filter(v=>+v.score>0).length}function board(){return state.rounds.map((r,i)=>({...r,i,total:total(r),count:count(r)})).filter(r=>r.revealed).sort((a,b)=>b.total-a.total||a.i-b.i)}
 function renderScreen(){
  const r=state.rounds[state.round],done=count(r),sum=total(r),rows=board();
@@ -70,6 +96,103 @@ function renderScreen(){
 
 function renderEntries(){const r=state.rounds[editing];$('roundTitle').textContent=`Runde ${editing+1} av 18 · ${names[editing%names.length]} henter · ${names[(editing+1)%names.length]} starter`;$('entries').innerHTML=names.map(n=>{const v=r.votes[n]||{};return `<div class="person" data-name="${esc(n)}"><strong>${esc(n)}</strong><label class="score-input"><span class="sr-only">Terningkast for ${esc(n)}</span><select class="rating" aria-label="Terningkast for ${esc(n)}"><option value="0">–</option>${[1,2,3,4,5,6].map(x=>`<option value="${x}" ${+v.score===x?'selected':''}>${x}</option>`).join('')}</select></label><label class="guess-input"><span class="sr-only">Ølgjetning for ${esc(n)}</span><input class="guess" value="${esc(v.guess)}" placeholder="Gjett øl (valgfritt)" aria-label="Ølgjetning for ${esc(n)}"></label></div>`}).join('');$('beerName').value=r.beer||'';$('revealNote').textContent=r.revealed?'Dette ølet er avslørt.':'Ølnavnet er foreløpig skjult på prosjektoren.';$('prevBtn').disabled=editing===0;$('nextBtn').disabled=editing===17;}
 function gather(){const r=state.rounds[editing];document.querySelectorAll('.person').forEach(el=>{const n=el.dataset.name;const previous=r.votes[n]||{};r.votes[n]={...previous,score:+el.querySelector('.rating').value,guess:el.querySelector('.guess').value.trim()}});r.beer=$('beerName').value.trim();dirty=true;}
-function stats(){const v=names.map(n=>{const arr=state.rounds.map(r=>r.votes?.[n]).filter(x=>x&&+x.score>0).map(x=>+x.score);return {n,c:arr.length,sum:arr.reduce((a,b)=>a+b,0),avg:arr.length?arr.reduce((a,b)=>a+b,0)/arr.length:0,range:arr.length?Math.max(...arr)-Math.min(...arr):0,sixes:arr.filter(x=>x===6).length}}).filter(x=>x.c);if(!v.length)return 'Ingen poeng ennå.';const high=[...v].sort((a,b)=>b.avg-a.avg)[0],low=[...v].sort((a,b)=>a.avg-b.avg)[0],joker=[...v].sort((a,b)=>b.range-a.range)[0];return `<p>🎅 Årets julenisse: <b>${esc(high.n)}</b> (${high.avg.toFixed(2)} i snitt)</p><p>🧊 Årets ølpoliti: <b>${esc(low.n)}</b> (${low.avg.toFixed(2)} i snitt)</p><p>🎲 Årets joker: <b>${esc(joker.n)}</b> (spenn ${joker.range})</p><table><tr><th>Dommer</th><th>Antall</th><th>Snitt</th><th>Seksere</th></tr>${v.map(x=>`<tr><td>${esc(x.n)}</td><td>${x.c}</td><td>${x.avg.toFixed(2)}</td><td>${x.sixes}</td></tr>`).join('')}</table><p class="muted">Ølkjenner-prisen krever at riktige gjetninger vurderes manuelt.</p>`;}
-function render(){renderScreen();$('login').classList.toggle('hidden',!!authUser);$('controls').classList.toggle('hidden',!authUser);if(authUser){$('who').textContent=authUser.email;$('adminStats').innerHTML=stats();if(!dirty)renderEntries();}}async function save(){if(!authUser)throw Error('Du må logge inn');await setDoc(ref,{round:state.round,rounds:state.rounds,updatedAt:new Date().toISOString()});dirty=false;$('saveStatus').textContent='Lagret ✓';}async function action(fn){try{gather();fn();await save();render()}catch(e){$('saveStatus').textContent='Feil: '+e.message;}}$('saveBtn').onclick=()=>action(()=>{});$('prevBtn').onclick=()=>action(()=>{editing=Math.max(0,editing-1);state.round=editing});$('nextBtn').onclick=()=>action(()=>{editing=Math.min(17,editing+1);state.round=editing});$('revealBtn').onclick=()=>action(()=>{if(!state.rounds[editing].beer)throw Error('Skriv inn ølnavnet først');if(count(state.rounds[editing])!==11&&!confirm('Ikke alle 11 har gitt terningkast. Avsløre likevel?'))throw Error('Avbrutt');state.rounds[editing].revealed=true;state.round=editing});$('hideBtn').onclick=()=>action(()=>{state.rounds[editing].revealed=false;state.round=editing});$('logoutBtn').onclick=()=>signOut(auth);$('loginBtn').onclick=async()=>{try{$('loginError').textContent='';await signInWithEmailAndPassword(auth,$('email').value.trim(),$('password').value)}catch(e){$('loginError').textContent=e.message}};$('exportBtn').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({exportedAt:new Date().toISOString(),...state},(k,v)=>k==='authUser'?undefined:v,2)],{type:'application/json'}));a.download='juleol-tv-2026-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};onAuthStateChanged(auth,u=>{authUser=u;render()});onSnapshot(ref,snap=>{if(snap.exists()){const d=snap.data();state.rounds=Array.from({length:18},(_,i)=>{const old=d.rounds?.[i]||{};return {...empty(),...old,votes:{...empty().votes,...old.votes}}});state.round=Math.max(0,Math.min(17,d.round||0));if(!dirty)editing=state.round;}$('status').textContent='🟢 Koblet til Firebase · live synkronisering';state.loading=false;render()},err=>{$('status').textContent='🔴 Firestore: '+err.message});show(location.hash==='#admin'?'admin':'screen');
+function comma(x,d=2){return Number(x).toFixed(d).replace('.',',')}
+function revealedRounds(){return state.rounds.map((r,i)=>({...r,i})).filter(r=>r.revealed)}
+function judgeStats(){
+ const rr=revealedRounds();
+ return names.map(n=>{
+  const a=rr.map(r=>({r,v:r.votes?.[n]})).filter(x=>+x.v?.score>0);
+  const scores=a.map(x=>+x.v.score);
+  const avg=scores.length?scores.reduce((x,y)=>x+y,0)/scores.length:0;
+  const correct=a.filter(x=>x.v.correct===true).length;
+  const judged=a.filter(x=>x.v.correct===true||x.v.correct===false).length;
+  const deviations=a.map(({r,v})=>{const others=names.filter(m=>m!==n).map(m=>+r.votes?.[m]?.score||0).filter(Boolean);return others.length?Math.abs(+v.score-others.reduce((x,y)=>x+y,0)/others.length):null}).filter(x=>x!==null);
+  return {n,c:scores.length,avg,sixes:scores.filter(x=>x===6).length,ones:scores.filter(x=>x===1).length,
+    spread:scores.length>1?Math.max(...scores)-Math.min(...scores):0,
+    min:scores.length?Math.min(...scores):0,max:scores.length?Math.max(...scores):0,
+    correct,judged,dev:deviations.length?deviations.reduce((x,y)=>x+y,0)/deviations.length:null};
+ });
+}
+function leaders(items,compare){
+ if(!items.length)return [];
+ const sorted=[...items].sort(compare);
+ return sorted.filter(x=>compare(x,sorted[0])===0);
+}
+function awardHTML(title,desc,people,detail){
+ const winner=people.length?people.map(x=>esc(x.n)).join(' / '):'Avventer';
+ return `<div class="award-card"><div class="award-name">${title}</div><div class="award-winner">${winner}</div><div class="award-desc">${desc}${detail?' · '+detail:''}</div></div>`;
+}
+function renderData(){
+ const rr=revealedRounds(), js=judgeStats(), eligible=js.filter(x=>x.c>0), beerRows=board();
+ const all=rr.flatMap(r=>names.map(n=>+r.votes?.[n]?.score||0).filter(Boolean));
+ const overall=all.length?all.reduce((a,b)=>a+b,0)/all.length:0;
+ const withFull=rr.filter(r=>count(r)===11).length;
+ const guessed=eligible.reduce((a,x)=>a+x.correct,0),reviewed=eligible.reduce((a,x)=>a+x.judged,0);
+ const beerStats=beerRows.map(r=>{const ss=votes(r).map(v=>+v.score||0).filter(Boolean);const avg=ss.length?ss.reduce((a,b)=>a+b,0)/ss.length:0;
+  const variance=ss.length>1?ss.reduce((a,x)=>a+(x-avg)**2,0)/ss.length:0;return {...r,avg,spread:ss.length?Math.max(...ss)-Math.min(...ss):0,sd:Math.sqrt(variance),min:ss.length?Math.min(...ss):0,max:ss.length?Math.max(...ss):0}});
+ const contested=beerStats.length?[...beerStats].sort((a,b)=>b.sd-a.sd)[0]:null;
+ const leader=(arr)=>arr.map(x=>esc(x.n)).join(' / ');
+ const jolly=leaders(eligible,(a,b)=>b.avg-a.avg),strict=leaders(eligible,(a,b)=>a.avg-b.avg);
+ const joker=leaders(eligible.filter(x=>x.c>=2),(a,b)=>b.spread-a.spread);
+ const experts=reviewed?leaders(eligible.filter(x=>x.judged>0),(a,b)=>b.correct-a.correct):[];
+ const consensus=leaders(eligible.filter(x=>x.dev!==null),(a,b)=>a.dev-b.dev);
+ const slay=leaders(eligible,(a,b)=>b.ones-a.ones);
+ const awards=[
+  awardHTML('🎅 Årets julenisse','Høyest snitt',jolly,jolly.length?comma(jolly[0].avg):''),
+  awardHTML('🧊 Årets ølpoliti','Lavest snitt',strict,strict.length?comma(strict[0].avg):''),
+  awardHTML('🎯 Årets ølkjenner','Flest godkjente riktige gjetninger',experts,experts.length?experts[0].correct+' riktige':'Ingen godkjent ennå'),
+  awardHTML('🎲 Årets joker','Størst spenn mellom karakterer (min. 2 kast)',joker,joker.length?'Spenn '+joker[0].spread:''),
+  awardHTML('🤝 Årets folkedommer','Minst snittavvik fra øvrige dommere',consensus,consensus.length?comma(consensus[0].dev)+' avvik':''),
+  awardHTML('💥 Flest enere','Flest terningkast 1',slay,slay.length?slay[0].ones+' enere':'')
+ ].join('');
+ const beerTable=beerStats.length?`<table class="data-table"><thead><tr><th>#</th><th>Øl</th><th>Kast</th><th>Sum</th><th>Snitt</th><th>Min–maks</th></tr></thead><tbody>${beerStats.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.beer||'Øl '+(r.i+1))}</td><td>${r.count}/11</td><td>${r.total}</td><td>${comma(r.avg)}</td><td>${r.min}–${r.max}</td></tr>`).join('')}</tbody></table>`:'<p class="data-note">Ølstatistikk vises etter første avsløring.</p>';
+ const judgeTable=`<table class="data-table"><thead><tr><th>Dommer</th><th>Kast</th><th>Snitt</th><th>1-ere</th><th>6-ere</th><th>Riktige gjetninger</th></tr></thead><tbody>${js.map(x=>`<tr><td>${esc(x.n)}</td><td>${x.c}</td><td>${x.c?comma(x.avg):'–'}</td><td>${x.ones}</td><td>${x.sixes}</td><td>${x.correct}${x.judged?' / '+x.judged:''}</td></tr>`).join('')}</tbody></table>`;
+ $('dataContent').innerHTML=`<div class="data-cards">
+  <div class="data-card"><strong>${rr.length}/18</strong><span>Avslørte øl</span></div>
+  <div class="data-card"><strong>${all.length}/198</strong><span>Terningkast på avslørte øl</span></div>
+  <div class="data-card"><strong>${all.length?comma(overall):'–'}</strong><span>Gjennomsnittlig terningkast</span></div>
+  <div class="data-card"><strong>${guessed}/${reviewed}</strong><span>Riktige / vurderte ølgjetninger</span></div></div>
+  <div class="panel"><h2>🏆 Live Awards</h2><p class="data-note">Foreløpige ledere. Kun avslørte øl teller. Ved lik score deles ledelsen.</p><div class="awards-grid">${awards}</div></div>
+  <div class="data-columns"><div class="panel"><h2>🍺 Ølstatistikk</h2>${beerTable}</div><div class="panel"><h2>🎲 Dommerstatistikk</h2>${judgeTable}</div></div>
+  <div class="panel"><h2>📌 Litt ekstra statistikk</h2><p>${withFull} av ${rr.length} avslørte øl har alle 11 terningkast.</p>
+  <p>${contested?'Mest omdiskuterte øl: <b>'+esc(contested.beer)+'</b> (standardavvik '+comma(contested.sd)+')':'Mest omdiskuterte øl vises når øl er avslørt.'}</p>
+  <p class="data-note">Øl rangeres etter samlet poengsum. Ufullstendige runder kan derfor havne lavere; antall kast vises alltid. Ingen uavslørte øl tas med.</p></div>`;
+}
+function renderGuessReview(){
+ const rr=revealedRounds(), html=rr.map(r=>{
+  const guesses=names.map(n=>({n,v:r.votes?.[n]})).filter(x=>x.v?.guess?.trim());
+  if(!guesses.length)return '';
+  return `<div class="panel"><h3>Runde ${r.i+1}: ${esc(r.beer)}</h3>${guesses.map(x=>{
+   const val=x.v.correct;
+   return `<div class="guess-review"><div><b>${esc(x.n)}</b> · ${esc(x.v.guess)}</div><div class="decision"><button type="button" class="guessDecision ${val===true?'selected':''}" data-round="${r.i}" data-name="${esc(x.n)}" data-value="yes">✓ Riktig</button><button type="button" class="guessDecision no ${val===false?'selected':''}" data-round="${r.i}" data-name="${esc(x.n)}" data-value="no">✕ Feil</button></div></div>`;
+  }).join('')}</div>`;
+ }).join('');
+ $('guessReview').innerHTML=html||'<p class="muted">Ingen ølgjetninger på avslørte øl ennå.</p>';
+}
+function render(){renderScreen();$('login').classList.toggle('hidden',!!authUser);$('controls').classList.toggle('hidden',!authUser);renderData();if(authUser){$('who').textContent=authUser.email;if(!dirty){renderEntries();renderGuessReview();}}}async function save(){if(!authUser)throw Error('Du må logge inn');await setDoc(ref,{round:state.round,rounds:state.rounds,updatedAt:new Date().toISOString()});dirty=false;$('saveStatus').textContent='Lagret ✓';}async function action(fn){try{gather();fn();await save();render()}catch(e){$('saveStatus').textContent='Feil: '+e.message;}}$('saveBtn').onclick=()=>action(()=>{});$('prevBtn').onclick=()=>action(()=>{editing=Math.max(0,editing-1);state.round=editing});$('nextBtn').onclick=()=>action(()=>{editing=Math.min(17,editing+1);state.round=editing});$('revealBtn').onclick=()=>action(()=>{if(!state.rounds[editing].beer)throw Error('Skriv inn ølnavnet først');if(count(state.rounds[editing])!==11&&!confirm('Ikke alle 11 har gitt terningkast. Avsløre likevel?'))throw Error('Avbrutt');state.rounds[editing].revealed=true;state.round=editing});$('hideBtn').onclick=()=>action(()=>{state.rounds[editing].revealed=false;state.round=editing});$('guessReview').addEventListener('click',e=>{
+ const btn=e.target.closest('.guessDecision');if(!btn)return;
+ const i=+btn.dataset.round,n=btn.dataset.name;
+ const v=state.rounds[i]?.votes?.[n];if(!v||!state.rounds[i].revealed)return;
+ v.correct=btn.dataset.value==='yes';
+ dirty=true;
+ renderGuessReview();
+ $('guessStatus').textContent='Endret – trykk Lagre godkjenninger.';
+});
+$('saveGuessesBtn').onclick=async()=>{
+ try{if(!authUser)throw Error('Du må logge inn');
+ await setDoc(ref,{round:state.round,rounds:state.rounds,updatedAt:new Date().toISOString()});
+ dirty=false;$('guessStatus').textContent='Godkjenninger lagret ✓';render();
+ }catch(e){$('guessStatus').textContent='Feil: '+e.message}
+};
+$('resetBtn').onclick=async()=>{
+ if(!authUser)return;
+ if(!confirm('Dette sletter ALLE 18 runder i Firebase, også ekte resultater. Last ned sikkerhetskopi først. Fortsette?'))return;
+ const phrase=prompt('Skriv NULLSTILL for å bekrefte at alle resultater skal slettes:');
+ if(phrase!=='NULLSTILL')return;
+ try{await setDoc(ref,{round:0,rounds:Array.from({length:18},empty),updatedAt:new Date().toISOString()});
+ state.round=0;state.rounds=Array.from({length:18},empty);editing=0;dirty=false;
+ $('saveStatus').textContent='Testdata nullstilt ✓';render();
+ }catch(e){$('saveStatus').textContent='Feil ved nullstilling: '+e.message}
+};
+$('logoutBtn').onclick=()=>signOut(auth);$('loginBtn').onclick=async()=>{try{$('loginError').textContent='';await signInWithEmailAndPassword(auth,$('email').value.trim(),$('password').value)}catch(e){$('loginError').textContent=e.message}};$('exportBtn').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({exportedAt:new Date().toISOString(),...state},(k,v)=>k==='authUser'?undefined:v,2)],{type:'application/json'}));a.download='juleol-tv-2026-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};onAuthStateChanged(auth,u=>{authUser=u;render()});onSnapshot(ref,snap=>{if(snap.exists()){const d=snap.data();state.rounds=Array.from({length:18},(_,i)=>{const old=d.rounds?.[i]||{};return {...empty(),...old,votes:{...empty().votes,...old.votes}}});state.round=Math.max(0,Math.min(17,d.round||0));if(!dirty)editing=state.round;}$('status').textContent='🟢 Koblet til Firebase · live synkronisering';state.loading=false;render()},err=>{$('status').textContent='🔴 Firestore: '+err.message});show(location.hash==='#admin'?'admin':location.hash==='#data'?'data':'screen');
 </script></body></html>
